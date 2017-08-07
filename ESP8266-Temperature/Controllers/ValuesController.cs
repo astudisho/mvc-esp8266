@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace ESP8266_Temperature.Controllers
@@ -10,20 +11,21 @@ namespace ESP8266_Temperature.Controllers
     public class ValuesController : ApiController
     {
         // GET api/values
-        public IEnumerable<string> Get()
+        public async Task<IHttpActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Json(new string[] { "value1", "value2" });
         }
 
         // GET api/values/5
-        public string Get(int id)
+        public async Task<IHttpActionResult> Get(int id)
         {
-            return "value";
+            return Ok(new { value = id });
         }
 
         // POST api/values
         public void Post([FromBody]string value)
         {
+
         }
 
         // PUT api/values/5
