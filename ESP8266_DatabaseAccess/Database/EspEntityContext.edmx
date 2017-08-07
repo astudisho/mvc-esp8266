@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="esp8266Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.esp8266.t_esp_node' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="t_esp_node">
+          <Key>
+            <PropertyRef Name="idNode" />
+            <PropertyRef Name="chipInfo" />
+            <PropertyRef Name="flashInfo" />
+            <PropertyRef Name="alias" />
+            <PropertyRef Name="isActive" />
+          </Key>
+          <Property Name="idNode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="chipInfo" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="flashInfo" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="alias" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.esp8266.t_esp_temp_humedad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="t_esp_temp_humedad">
+          <Key>
+            <PropertyRef Name="idTempHumedad" />
+            <PropertyRef Name="temperatura" />
+            <PropertyRef Name="humedad" />
+            <PropertyRef Name="idNode" />
+            <PropertyRef Name="horaFecha" />
+          </Key>
+          <Property Name="idTempHumedad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="temperatura" Type="float" Nullable="false" />
+          <Property Name="humedad" Type="float" Nullable="false" />
+          <Property Name="idNode" Type="int" Nullable="false" />
+          <Property Name="horaFecha" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 't_esp_temp_humedad_ibfk_1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="t_esp_temp_humedad_ibfk_1" />-->
+        <EntityContainer Name="esp8266ModelStoreContainer">
+          <EntitySet Name="t_esp_node" EntityType="Self.t_esp_node" store:Type="Tables" store:Schema="esp8266">
+            <DefiningQuery>SELECT
+`t_esp_node`.`idNode`, 
+`t_esp_node`.`chipInfo`, 
+`t_esp_node`.`flashInfo`, 
+`t_esp_node`.`alias`, 
+`t_esp_node`.`isActive`
+FROM `t_esp_node` AS `t_esp_node`</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="t_esp_temp_humedad" EntityType="Self.t_esp_temp_humedad" store:Type="Tables" store:Schema="esp8266">
+            <DefiningQuery>SELECT
+`t_esp_temp_humedad`.`idTempHumedad`, 
+`t_esp_temp_humedad`.`temperatura`, 
+`t_esp_temp_humedad`.`humedad`, 
+`t_esp_temp_humedad`.`idNode`, 
+`t_esp_temp_humedad`.`horaFecha`
+FROM `t_esp_temp_humedad` AS `t_esp_temp_humedad`</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="esp8266Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="t_esp_node">
+          <Key>
+            <PropertyRef Name="idNode" />
+            <PropertyRef Name="chipInfo" />
+            <PropertyRef Name="flashInfo" />
+            <PropertyRef Name="alias" />
+            <PropertyRef Name="isActive" />
+          </Key>
+          <Property Name="idNode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="chipInfo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="flashInfo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="alias" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_esp_temp_humedad">
+          <Key>
+            <PropertyRef Name="idTempHumedad" />
+            <PropertyRef Name="temperatura" />
+            <PropertyRef Name="humedad" />
+            <PropertyRef Name="idNode" />
+            <PropertyRef Name="horaFecha" />
+          </Key>
+          <Property Name="idTempHumedad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="temperatura" Type="Single" Nullable="false" />
+          <Property Name="humedad" Type="Single" Nullable="false" />
+          <Property Name="idNode" Type="Int32" Nullable="false" />
+          <Property Name="horaFecha" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityContainer Name="esp8266Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="t_esp_node" EntityType="Self.t_esp_node" />
+          <EntitySet Name="t_esp_temp_humedad" EntityType="Self.t_esp_temp_humedad" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="esp8266ModelStoreContainer" CdmEntityContainer="esp8266Entities">
+          <EntitySetMapping Name="t_esp_node">
+            <EntityTypeMapping TypeName="esp8266Model.t_esp_node">
+              <MappingFragment StoreEntitySet="t_esp_node">
+                <ScalarProperty Name="idNode" ColumnName="idNode" />
+                <ScalarProperty Name="chipInfo" ColumnName="chipInfo" />
+                <ScalarProperty Name="flashInfo" ColumnName="flashInfo" />
+                <ScalarProperty Name="alias" ColumnName="alias" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_esp_temp_humedad">
+            <EntityTypeMapping TypeName="esp8266Model.t_esp_temp_humedad">
+              <MappingFragment StoreEntitySet="t_esp_temp_humedad">
+                <ScalarProperty Name="idTempHumedad" ColumnName="idTempHumedad" />
+                <ScalarProperty Name="temperatura" ColumnName="temperatura" />
+                <ScalarProperty Name="humedad" ColumnName="humedad" />
+                <ScalarProperty Name="idNode" ColumnName="idNode" />
+                <ScalarProperty Name="horaFecha" ColumnName="horaFecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

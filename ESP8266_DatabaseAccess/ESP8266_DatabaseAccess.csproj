@@ -54,6 +54,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -68,6 +70,27 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\EspEntityContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EspEntityContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\EspEntityContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EspEntityContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\EspEntityContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EspEntityContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Database\t_esp_node.cs">
+      <DependentUpon>EspEntityContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\t_esp_temp_humedad.cs">
+      <DependentUpon>EspEntityContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -81,10 +104,19 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Repository\Implementation\GenericRepository.cs" />
+    <Compile Include="Repository\Interfaces\IGenericRepository.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Database\EspEntityContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EspEntityContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Database\EspEntityContext.edmx.diagram">
+      <DependentUpon>EspEntityContext.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -95,6 +127,22 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Database\EspEntityContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EspEntityContext.edmx</DependentUpon>
+      <LastGenOutput>EspEntityContext.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Database\EspEntityContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EspEntityContext.edmx</DependentUpon>
+      <LastGenOutput>EspEntityContext.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
