@@ -1,4 +1,4 @@
-﻿using ESP8266_DatabaseAccess.Repository.Interfaces;
+﻿using ESP8266_Database.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 
-namespace ESP8266_DatabaseAccess.Repository.Implementation
+namespace ESP8266_Database.Repository.Implementation
 {
     public class GenericRepository<TType> : IGenericRepository<TType> where TType : class
     {
         protected readonly DbContext DbContext;
         protected readonly DbSet<TType> Table;
 
-        public GenericRepository(ESP8266_DatabaseAccess.Database.esp8266Entities dbContext)
+        public GenericRepository(ESP8266_Database.Database.esp8266Entities dbContext)
         {
             DbContext = dbContext;
             Table = DbContext.Set<TType>();

@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="esp8266Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="t_node">
+          <Key>
+            <PropertyRef Name="IdNode" />
+          </Key>
+          <Property Name="IdNode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChipInfo" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="FlashInfo" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="IsActive" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_temp_humedad">
+          <Key>
+            <PropertyRef Name="IdTempHumedad" />
+            <PropertyRef Name="t_node_IdNode" />
+          </Key>
+          <Property Name="IdTempHumedad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Temperatura" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Humedad" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="HoraFecha" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="t_node_IdNode" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_t_temp_humedad_t_node">
+          <End Role="t_node" Type="Self.t_node" Multiplicity="1" />
+          <End Role="t_temp_humedad" Type="Self.t_temp_humedad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_node">
+              <PropertyRef Name="IdNode" />
+            </Principal>
+            <Dependent Role="t_temp_humedad">
+              <PropertyRef Name="t_node_IdNode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="esp8266ModelStoreContainer">
+          <EntitySet Name="t_node" EntityType="Self.t_node" Schema="esp8266" store:Type="Tables" />
+          <EntitySet Name="t_temp_humedad" EntityType="Self.t_temp_humedad" Schema="esp8266" store:Type="Tables" />
+          <AssociationSet Name="fk_t_temp_humedad_t_node" Association="Self.fk_t_temp_humedad_t_node">
+            <End Role="t_node" EntitySet="t_node" />
+            <End Role="t_temp_humedad" EntitySet="t_temp_humedad" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="esp8266Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="t_node">
+          <Key>
+            <PropertyRef Name="IdNode" />
+          </Key>
+          <Property Name="IdNode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChipInfo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FlashInfo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="t_temp_humedad" Relationship="Self.fk_t_temp_humedad_t_node" FromRole="t_node" ToRole="t_temp_humedad" />
+        </EntityType>
+        <EntityType Name="t_temp_humedad">
+          <Key>
+            <PropertyRef Name="IdTempHumedad" />
+            <PropertyRef Name="t_node_IdNode" />
+          </Key>
+          <Property Name="IdTempHumedad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Temperatura" Type="Decimal" Nullable="false" />
+          <Property Name="Humedad" Type="Decimal" Nullable="false" />
+          <Property Name="HoraFecha" Type="DateTime" Nullable="false" />
+          <Property Name="t_node_IdNode" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="t_node" Relationship="Self.fk_t_temp_humedad_t_node" FromRole="t_temp_humedad" ToRole="t_node" />
+        </EntityType>
+        <Association Name="fk_t_temp_humedad_t_node">
+          <End Role="t_node" Type="Self.t_node" Multiplicity="1" />
+          <End Role="t_temp_humedad" Type="Self.t_temp_humedad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_node">
+              <PropertyRef Name="IdNode" />
+            </Principal>
+            <Dependent Role="t_temp_humedad">
+              <PropertyRef Name="t_node_IdNode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="esp8266Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="t_node" EntityType="Self.t_node" />
+          <EntitySet Name="t_temp_humedad" EntityType="Self.t_temp_humedad" />
+          <AssociationSet Name="fk_t_temp_humedad_t_node" Association="Self.fk_t_temp_humedad_t_node">
+            <End Role="t_node" EntitySet="t_node" />
+            <End Role="t_temp_humedad" EntitySet="t_temp_humedad" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="esp8266ModelStoreContainer" CdmEntityContainer="esp8266Entities">
+          <EntitySetMapping Name="t_node">
+            <EntityTypeMapping TypeName="esp8266Model.t_node">
+              <MappingFragment StoreEntitySet="t_node">
+                <ScalarProperty Name="IdNode" ColumnName="IdNode" />
+                <ScalarProperty Name="ChipInfo" ColumnName="ChipInfo" />
+                <ScalarProperty Name="FlashInfo" ColumnName="FlashInfo" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_temp_humedad">
+            <EntityTypeMapping TypeName="esp8266Model.t_temp_humedad">
+              <MappingFragment StoreEntitySet="t_temp_humedad">
+                <ScalarProperty Name="IdTempHumedad" ColumnName="IdTempHumedad" />
+                <ScalarProperty Name="Temperatura" ColumnName="Temperatura" />
+                <ScalarProperty Name="Humedad" ColumnName="Humedad" />
+                <ScalarProperty Name="HoraFecha" ColumnName="HoraFecha" />
+                <ScalarProperty Name="t_node_IdNode" ColumnName="t_node_IdNode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

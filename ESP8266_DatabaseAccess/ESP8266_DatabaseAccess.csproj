@@ -70,26 +70,26 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database\EspEntityContext.Context.cs">
+    <Compile Include="Database\EspDbEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EspEntityContext.Context.tt</DependentUpon>
+      <DependentUpon>EspDbEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\EspEntityContext.cs">
+    <Compile Include="Database\EspDbEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EspEntityContext.tt</DependentUpon>
+      <DependentUpon>EspDbEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\EspEntityContext.Designer.cs">
+    <Compile Include="Database\EspDbEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EspEntityContext.edmx</DependentUpon>
+      <DependentUpon>EspDbEntities.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Database\t_esp_node.cs">
-      <DependentUpon>EspEntityContext.tt</DependentUpon>
+    <Compile Include="Database\t_node.cs">
+      <DependentUpon>EspDbEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\t_esp_temp_humedad.cs">
-      <DependentUpon>EspEntityContext.tt</DependentUpon>
+    <Compile Include="Database\t_temp_humedad.cs">
+      <DependentUpon>EspDbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -105,17 +105,31 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Repository\Implementation\GenericRepository.cs" />
+    <Compile Include="Repository\Implementation\NodeRepository.cs" />
+    <Compile Include="Repository\Implementation\TempHumedadRepository.cs" />
     <Compile Include="Repository\Interfaces\IGenericRepository.cs" />
+    <Compile Include="Repository\Interfaces\INodeRepository.cs" />
+    <Compile Include="Repository\Interfaces\ITempHumedadRepository.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Database\EspEntityContext.edmx">
+    <EntityDeploy Include="Database\EspDbEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EspEntityContext.Designer.cs</LastGenOutput>
+      <LastGenOutput>EspDbEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Database\EspEntityContext.edmx.diagram">
-      <DependentUpon>EspEntityContext.edmx</DependentUpon>
+    <None Include="Database\EspDbEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EspDbEntities.edmx</DependentUpon>
+      <LastGenOutput>EspDbEntities.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Database\EspDbEntities.edmx.diagram">
+      <DependentUpon>EspDbEntities.edmx</DependentUpon>
+    </None>
+    <None Include="Database\EspDbEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EspDbEntities.edmx</DependentUpon>
+      <LastGenOutput>EspDbEntities.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -129,18 +143,6 @@
     </None>
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Content Include="Database\EspEntityContext.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EspEntityContext.edmx</DependentUpon>
-      <LastGenOutput>EspEntityContext.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Database\EspEntityContext.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EspEntityContext.edmx</DependentUpon>
-      <LastGenOutput>EspEntityContext.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
