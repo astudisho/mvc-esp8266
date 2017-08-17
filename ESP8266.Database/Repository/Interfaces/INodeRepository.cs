@@ -7,7 +7,7 @@ using ESP8266.Database.Database;
 
 namespace ESP8266.Database.Repository.Interfaces
 {
-    interface INodeRepository : IGenericRepository<t_node>
+    public interface INodeRepository : IGenericRepository<t_node>
     {
     }
 }

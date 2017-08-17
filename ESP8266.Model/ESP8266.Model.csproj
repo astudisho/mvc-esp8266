@@ -41,8 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Models\Node.cs" />
-    <Compile Include="Models\Temp_humedad.cs" />
+    <Compile Include="Models\NodeModel.cs" />
+    <Compile Include="Models\TempHumedadModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

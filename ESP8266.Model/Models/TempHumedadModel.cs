@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ESP8266.Model.Models
 {
-    class Temp_humedad
+    public class TempHumedadModel
     {
         public int IdTempHumedad { get; set; }
         public float Temperatura { get; set; }

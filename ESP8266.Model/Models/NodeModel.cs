@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ESP8266.Model.Models
 {
-    class Node
+    public class NodeModel
     {
         public int IdNode { get; set; }
         public string ChipInfo { get; set; }

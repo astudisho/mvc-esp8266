@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ESP8266.Database.Repository.Interfaces
 {
-    interface IGenericRepository<TType>
+    public interface IGenericRepository<TType>
     {
         Task<TType> Add(TType entity);
         Task Add(IEnumerable<TType> entities);

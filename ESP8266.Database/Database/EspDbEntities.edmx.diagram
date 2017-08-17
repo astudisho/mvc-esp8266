@@ -5,9 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="8df215344b1e4ec4ae02342b3e01758d" Name="Diagram1">
-        <EntityTypeShape EntityType="esp8266Model.t_node" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="esp8266Model.t_temp_humedad" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <AssociationConnector Association="esp8266Model.fk_t_temp_humedad_t_node" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="esp8266Model.t_node" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="esp8266Model.t_temp_humedad" Width="1.5" PointX="3" PointY="0.875" />
+        <AssociationConnector Association="esp8266Model.fk_t_temp_humedad_t_node" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

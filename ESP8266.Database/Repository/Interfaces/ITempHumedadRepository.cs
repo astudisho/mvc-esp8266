@@ -7,7 +7,7 @@ using ESP8266.Database.Database;
 
 namespace ESP8266.Database.Repository.Interfaces
 {
-    interface ITempHumedadRepository : IGenericRepository<t_temp_humedad>
+    public interface ITempHumedadRepository : IGenericRepository<t_temp_humedad>
     {
     }
 }

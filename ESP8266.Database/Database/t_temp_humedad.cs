@@ -18,7 +18,7 @@ namespace ESP8266.Database.Database
         public decimal Temperatura { get; set; }
         public decimal Humedad { get; set; }
         public System.DateTime HoraFecha { get; set; }
-        public int t_node_IdNode { get; set; }
+        public int IdNode { get; set; }
     
         public virtual t_node t_node { get; set; }
     }

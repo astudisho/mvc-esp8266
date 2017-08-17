@@ -5,17 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using ESP8266.Bussines;
 using ESP8266.Database.Repository.Implementation;
+using ESP8266.Database.Repository.Interfaces;
+using ESP8266.Bussines.Bussines.Interface;
 using AutoMapper;
 
 namespace ESP8266.Bussines
 {
-    class BaseBussines<MType, RType> where MType : class where RType : class
+    public class BaseBussines<MType, RType> where MType : class 
+                                            where RType : class
     {
-        private readonly GenericRepository<RType> repository;
+        private readonly IGenericRepository<RType> _repository;
 
-        public BaseBussines()
+        public BaseBussines(IGenericRepository<RType> repository)
         {
-            Mapper.Initialize(cfg => cfg.CreateMap(typeof(MType), typeof(RType)));
+            _repository = repository;
+
+            Mapper.Initialize(cfg => {
+                cfg.CreateMap(typeof(MType), typeof(RType));
+                cfg.CreateMap(typeof(RType), typeof(MType));
+            });
         }
 
         public async Task<MType> Add(MType model)
@@ -24,7 +32,8 @@ namespace ESP8266.Bussines
 
             try
             {
-                var resultRepo = await repository.Add(Mapper.Map<MType, RType>(model));
+                var toAdd = (Mapper.Map<MType, RType>(model));
+                var resultRepo = await _repository.Add(toAdd);
 
                 result = Mapper.Map<RType, MType>(resultRepo);
             }

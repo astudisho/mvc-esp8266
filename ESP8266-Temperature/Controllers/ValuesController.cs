@@ -6,13 +6,20 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
+using ESP8266.Model.Models;
+using ESP8266.Bussines.Bussines.Implementation;
+using ESP8266.Database.Repository.Implementation;
+using ESP8266.Database.Database;
+
 namespace ESP8266_Temperature.Controllers
 {
     public class ValuesController : ApiController
     {
+        
         // GET api/values
         public async Task<IHttpActionResult> Get()
         {
+            
             return Json(new string[] { "value1", "value2" });
         }
 
@@ -23,9 +30,10 @@ namespace ESP8266_Temperature.Controllers
         }
 
         // POST api/values
-        public void Post([FromBody]string value)
+        public async Task<IHttpActionResult> Post(TempHumedadModel model)
         {
-
+            var tempHumedadBussines = new TempHumedad(new GenericRepository<t_temp_humedad>(new esp8266Entities()));
+            return Json(await tempHumedadBussines.Add(model));
         }
 
         // PUT api/values/5
@@ -36,6 +44,14 @@ namespace ESP8266_Temperature.Controllers
         // DELETE api/values/5
         public void Delete(int id)
         {
+        }
+
+        [HttpPost]
+        [Route ]
+        public async Task<IHttpActionResult> Add(TempHumedadModel model)
+        {
+            var tempHumedadBussines = new TempHumedad(new GenericRepository<t_temp_humedad>(new esp8266Entities()));
+            return Json(await tempHumedadBussines.Add(model));
         }
     }
 }
