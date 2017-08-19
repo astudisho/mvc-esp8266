@@ -99,6 +99,7 @@
       <DependentUpon>EspDbEntities.edmx</DependentUpon>
       <LastGenOutput>EspDbEntities.cs</LastGenOutput>
     </Content>
+    <Content Include="MySQL\ESP8266-TemperaturaHumedad.mwb" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
