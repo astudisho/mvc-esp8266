@@ -42,17 +42,17 @@ namespace ESP8266_Temperature.Tests.Controllers
         //    Assert.AreEqual("value", result);
         //}
 
-        [TestMethod]
-        public void Post()
-        {
-            // Arrange
-            ValuesController controller = new ValuesController();
+        //[TestMethod]
+        //public void Post()
+        //{
+        //    // Arrange
+        //    ValuesController controller = new ValuesController();
 
-            // Act
-            controller.Post("value");
+        //    // Act
+        //    controller.Post("value");
 
-            // Assert
-        }
+        //    // Assert
+        //}
 
         [TestMethod]
         public void Put()

@@ -16,7 +16,7 @@ namespace ESP8266.Database.Repository.Interfaces
         Task<TType> Get(Expression<Func<TType, bool>> filter);
         Task<IList<TType>> GetAny(Expression<Func<TType, bool>> filter);
         IList<TType> GetAnyNotAsync(Expression<Func<TType, bool>> filter);
-        Task<IList<TType>> GetAll();
+        Task<IEnumerable<TType>> GetAll();
         IQueryable<TType> GetQueryable();
     }
 }

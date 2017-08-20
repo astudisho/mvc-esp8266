@@ -9,7 +9,7 @@ using ESP8266.Database.Repository.Implementation;
 
 namespace ESP8266.Database.Repository.Implementation
 {
-    class NodeRepository : GenericRepository<t_node> ,INodeRepository
+    public class NodeRepository : GenericRepository<t_node> ,INodeRepository
     {
         public NodeRepository(esp8266Entities dbContext) : base(dbContext)
         {

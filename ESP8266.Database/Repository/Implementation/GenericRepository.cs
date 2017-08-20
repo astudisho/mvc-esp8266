@@ -67,7 +67,7 @@ namespace ESP8266.Database.Repository.Implementation
             return await Table.AsNoTracking().FirstOrDefaultAsync(filter);
         }
 
-        public virtual async Task<IList<TType>> GetAll()
+        public virtual async Task<IEnumerable<TType>> GetAll()
         {
             return await Table.AsNoTracking().ToListAsync();
         }
@@ -86,5 +86,6 @@ namespace ESP8266.Database.Repository.Implementation
         {
             return Table.AsNoTracking().AsQueryable();
         }
+
     }
 }

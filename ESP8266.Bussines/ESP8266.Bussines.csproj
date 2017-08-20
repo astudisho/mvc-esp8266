@@ -81,8 +81,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bussines\Implementation\BaseBussines.cs" />
+    <Compile Include="Bussines\Implementation\Node.cs" />
     <Compile Include="Bussines\Implementation\TempHumedad.cs" />
+    <Compile Include="Bussines\Interface\IBaseBussines.cs" />
+    <Compile Include="Bussines\Interface\INode.cs" />
     <Compile Include="Bussines\Interface\ITempHumedad.cs" />
+    <Compile Include="Bussines\Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
