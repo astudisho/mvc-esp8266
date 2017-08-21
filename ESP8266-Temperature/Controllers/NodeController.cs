@@ -19,11 +19,15 @@ namespace ESP8266_Temperature.Controllers
         {
             _node = tempHumedad;
         }
+		[HttpPost]
+		[Route("Add")]
         public async Task<IHttpActionResult> Add(NodeModel model)
         {
             return Json(await _node.Add(model));
         }
 
+		[HttpGet]
+		[Route("GetAll")]
         public async Task<IHttpActionResult> GetAll()
         {
             return Json(await _node.GetAll());

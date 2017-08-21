@@ -8,6 +8,9 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using ESP8266_Temperature.UserConfigurationClass;
 using ESP8266_Temperature.App_Start;
+using log4net;
+
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
 namespace ESP8266_Temperature
 {
@@ -20,7 +23,6 @@ namespace ESP8266_Temperature
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            //NinjectWebCommon.Start();
         }
     }
 }

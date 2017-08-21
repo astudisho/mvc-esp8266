@@ -9,6 +9,7 @@ namespace ESP8266.Model.Models
         public int IdNode { get; set; }
         public string ChipInfo { get; set; }
         public string FlashInfo { get; set; }
-        public bool IsActive { get; set; }
+	    public string Guid { get; set; }
+		public bool IsActive { get; set; }
     }
 }

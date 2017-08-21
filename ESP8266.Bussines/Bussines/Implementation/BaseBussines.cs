@@ -8,6 +8,7 @@ using ESP8266.Database.Repository.Implementation;
 using ESP8266.Database.Repository.Interfaces;
 using ESP8266.Bussines.Bussines.Interface;
 using AutoMapper;
+using log4net;
 
 namespace ESP8266.Bussines
 {
@@ -16,18 +17,20 @@ namespace ESP8266.Bussines
         where RType : class
 
     {
-    private readonly IGenericRepository<RType> _repository;
+		private readonly IGenericRepository<RType> _repository;
+	    protected readonly ILog _log;
 
-    public BaseBussines(IGenericRepository<RType> repository)
-    {
-        _repository = repository;
+        public BaseBussines(IGenericRepository<RType> repository, ILog log)
+		{
+			_repository = repository;
+			_log = log;
 
-        Mapper.Initialize(cfg =>
-        {
-            cfg.CreateMap(typeof(MType), typeof(RType));
-            cfg.CreateMap(typeof(RType), typeof(MType));
-        });
-    }
+			Mapper.Initialize(cfg =>
+			{
+				cfg.CreateMap(typeof(MType), typeof(RType));
+				cfg.CreateMap(typeof(RType), typeof(MType));
+			});
+		}
 
     public async Task<MType> Add(MType model)
     {
@@ -35,6 +38,7 @@ namespace ESP8266.Bussines
 
         try
         {
+			_log.Info("Inserting a row");
             var toAdd = (Mapper.Map<MType, RType>(model));
             var resultRepo = await _repository.Add(toAdd);
 
@@ -42,6 +46,7 @@ namespace ESP8266.Bussines
         }
         catch (Exception e)
         {
+            _log.Error(e);
             throw;
         }
 
@@ -62,7 +67,7 @@ namespace ESP8266.Bussines
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+				_log.Error(e);
                 throw;
             }
         }

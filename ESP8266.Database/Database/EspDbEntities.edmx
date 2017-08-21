@@ -12,6 +12,7 @@
           <Property Name="IdNode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ChipInfo" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="FlashInfo" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Guid" Type="varchar" MaxLength="36" />
           <Property Name="IsActive" Type="bool" Nullable="false" />
         </EntityType>
         <EntityType Name="t_temp_humedad">
@@ -38,8 +39,8 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="esp8266ModelStoreContainer">
-          <EntitySet Name="t_node" EntityType="Self.t_node" Schema="esp8266" store:Type="Tables" />
-          <EntitySet Name="t_temp_humedad" EntityType="Self.t_temp_humedad" Schema="esp8266" store:Type="Tables" />
+          <EntitySet Name="t_node" EntityType="Self.t_node" Schema="test_esp8266" store:Type="Tables" />
+          <EntitySet Name="t_temp_humedad" EntityType="Self.t_temp_humedad" Schema="test_esp8266" store:Type="Tables" />
           <AssociationSet Name="fk_t_temp_humedad_t_node" Association="Self.fk_t_temp_humedad_t_node">
             <End Role="t_node" EntitySet="t_node" />
             <End Role="t_temp_humedad" EntitySet="t_temp_humedad" />
@@ -66,6 +67,7 @@
           <Property Name="FlashInfo" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="t_temp_humedad" Relationship="esp8266Model.fk_t_temp_humedad_t_node" FromRole="t_node" ToRole="t_temp_humedad" />
+          <Property Name="Guid" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="t_temp_humedad">
           <Key>
@@ -91,7 +93,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -100,6 +102,7 @@
           <EntitySetMapping Name="t_node">
             <EntityTypeMapping TypeName="esp8266Model.t_node">
               <MappingFragment StoreEntitySet="t_node">
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="FlashInfo" ColumnName="FlashInfo" />
                 <ScalarProperty Name="ChipInfo" ColumnName="ChipInfo" />

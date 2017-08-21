@@ -24,6 +24,7 @@ namespace ESP8266.Database.Database
         public string ChipInfo { get; set; }
         public string FlashInfo { get; set; }
         public bool IsActive { get; set; }
+        public string Guid { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<t_temp_humedad> t_temp_humedad { get; set; }

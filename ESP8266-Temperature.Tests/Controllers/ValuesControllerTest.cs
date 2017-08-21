@@ -54,28 +54,28 @@ namespace ESP8266_Temperature.Tests.Controllers
         //    // Assert
         //}
 
-        [TestMethod]
-        public void Put()
-        {
-            // Arrange
-            ValuesController controller = new ValuesController();
+        //[TestMethod]
+        //public void Put()
+        //{
+        //    // Arrange
+        //    ValuesController controller = new ValuesController();
 
-            // Act
-            controller.Put(5, "value");
+        //    // Act
+        //    controller.Put(5, "value");
 
-            // Assert
-        }
+        //    // Assert
+        //}
 
-        [TestMethod]
-        public void Delete()
-        {
-            // Arrange
-            ValuesController controller = new ValuesController();
+        //[TestMethod]
+        //public void Delete()
+        //{
+        //    // Arrange
+        //    ValuesController controller = new ValuesController();
 
-            // Act
-            controller.Delete(5);
+        //    // Act
+        //    controller.Delete(5);
 
-            // Assert
-        }
+        //    // Assert
+        //}
     }
 }

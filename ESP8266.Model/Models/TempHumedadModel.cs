@@ -12,4 +12,9 @@ namespace ESP8266.Model.Models
         public int IdNode { get; set; }
         public DateTime HoraFecha { get; set; }
     }
+
+	public class TempHumedadAddModel : TempHumedadModel
+	{
+		public string ChipInfo { get; set; }
+	}
 }

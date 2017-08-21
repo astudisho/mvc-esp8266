@@ -1,3 +1,4 @@
+using log4net;
 using Ninject.Web.WebApi;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(ESP8266_Temperature.App_Start.NinjectWebCommon), "Start")]
@@ -72,10 +73,16 @@ namespace ESP8266_Temperature.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             //Ninject
+			//Bussines
             kernel.Bind<ITempHumedad>().To<TempHumedad>();
             kernel.Bind<INode>().To<Node>();
-            kernel.Bind<INodeRepository>().To<NodeRepository>();
-            kernel.Bind<ITempHumedad>().To<TempHumedad>();
+
+			//Repository
+            kernel.Bind<INodeRepository>().To<NodeRepository>().InSingletonScope();
+	        kernel.Bind<ITempHumedadRepository>().To<TempHumedadRepository>();
+
+			//Logger
+			kernel.Bind<ILog>().ToMethod(context => LogManager.GetLogger(context.Request.ParentContext.Plan.Type)).InSingletonScope();
         }        
     }
 }
