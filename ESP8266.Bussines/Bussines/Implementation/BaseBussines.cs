@@ -38,7 +38,6 @@ namespace ESP8266.Bussines
 
         try
         {
-			_log.Info("Inserting a row");
             var toAdd = (Mapper.Map<MType, RType>(model));
             var resultRepo = await _repository.Add(toAdd);
 
@@ -80,7 +79,7 @@ namespace ESP8266.Bussines
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                _log.Error(e);
                 throw;
             }
         }
