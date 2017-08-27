@@ -8,6 +8,8 @@
         <EntityTypeShape EntityType="esp8266Model.t_node" Width="1.5" PointX="0.75" PointY="1" />
         <EntityTypeShape EntityType="esp8266Model.t_temp_humedad" Width="1.5" PointX="3" PointY="0.875" />
         <AssociationConnector Association="esp8266Model.fk_t_temp_humedad_t_node" />
+        <EntityTypeShape EntityType="esp8266Model.t_pin" Width="1.5" PointX="3" PointY="4.125" />
+        <AssociationConnector Association="esp8266Model.fk_t_esp_pin_t_node1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

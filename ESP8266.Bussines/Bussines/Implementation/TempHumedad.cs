@@ -19,11 +19,11 @@ namespace ESP8266.Bussines.Bussines.Implementation
 	    private readonly ITempHumedadRepository _tempHumedadRepository;
 	    private readonly INodeRepository _nodeRepository;
 
-	    private readonly ILog _log;
+	    //private readonly ILog _log;
 		public TempHumedad(ITempHumedadRepository tempHumedadRepository, ILog log, INodeRepository nodeRepository): base(tempHumedadRepository,log)
         {
 	        _tempHumedadRepository = tempHumedadRepository;
-	        _log = log;
+	        //_log = log;
 	        _nodeRepository = nodeRepository;
         }
 

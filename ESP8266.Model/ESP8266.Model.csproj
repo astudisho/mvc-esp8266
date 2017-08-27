@@ -43,6 +43,7 @@
     <Compile Include="Models\NodeModel.cs" />
     <Compile Include="Models\PinModel.cs" />
     <Compile Include="Models\TempHumedadModel.cs" />
+    <Compile Include="Models\WebSocketModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

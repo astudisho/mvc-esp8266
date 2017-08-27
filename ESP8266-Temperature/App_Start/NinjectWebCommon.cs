@@ -76,6 +76,7 @@ namespace ESP8266_Temperature.App_Start
 			//Bussines
             kernel.Bind<ITempHumedad>().To<TempHumedad>();
             kernel.Bind<INode>().To<Node>();
+	        kernel.Bind<IPinWebSocketHandler>().To<PinWebSocketaHandler>();
 
 			//Repository
             kernel.Bind<INodeRepository>().To<NodeRepository>().InSingletonScope();

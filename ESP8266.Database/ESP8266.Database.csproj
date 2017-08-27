@@ -134,14 +134,19 @@
     <Compile Include="Database\t_node.cs">
       <DependentUpon>EspDbEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\t_pin.cs">
+      <DependentUpon>EspDbEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\t_temp_humedad.cs">
       <DependentUpon>EspDbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Implementation\GenericRepository.cs" />
+    <Compile Include="Repository\Implementation\PinRepository.cs" />
     <Compile Include="Repository\Implementation\NodeRepository.cs" />
     <Compile Include="Repository\Implementation\TempHumedadRepository.cs" />
     <Compile Include="Repository\Interfaces\IGenericRepository.cs" />
+    <Compile Include="Repository\Interfaces\IPinRepository.cs" />
     <Compile Include="Repository\Interfaces\INodeRepository.cs" />
     <Compile Include="Repository\Interfaces\ITempHumedadRepository.cs" />
   </ItemGroup>

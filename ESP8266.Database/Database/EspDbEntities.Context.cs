@@ -27,5 +27,6 @@ namespace ESP8266.Database.Database
     
         public virtual DbSet<t_node> t_node { get; set; }
         public virtual DbSet<t_temp_humedad> t_temp_humedad { get; set; }
+        public virtual DbSet<t_pin> t_pin { get; set; }
     }
 }

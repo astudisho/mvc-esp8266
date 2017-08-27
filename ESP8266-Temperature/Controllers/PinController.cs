@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.WebSockets;
 using ESP8266.Bussines.Bussines.Interface;
+using ESP8266.Bussines.Util;
 using ESP8266.Model.Models;
 using log4net;
 
@@ -22,10 +23,12 @@ namespace ESP8266_Temperature.Controllers
 	{
 		private readonly ILog _log;
 		private static WebSocket _ws;
-		
-		public PinController(ILog log)
+		private readonly IPinWebSocketHandler _webSocketHandler;
+
+		public PinController(ILog log, IPinWebSocketHandler webSocketHandler)
 		{
 			_log = log;
+			_webSocketHandler = webSocketHandler;
 		}
 
 		[HttpGet]
@@ -35,10 +38,10 @@ namespace ESP8266_Temperature.Controllers
 			if (!HttpContext.Current.IsWebSocketRequest || string.IsNullOrWhiteSpace(flashInfo))
 				return NotFound();
 
-			HttpContext.Current.Items.Add("FlashInfo", flashInfo);
-			HttpContext.Current.AcceptWebSocketRequest(HandleWebSocket);
-			
-			
+			HttpContext.Current.Items.Add(Constants.WebSockets.Uuid, flashInfo);
+			//HttpContext.Current.AcceptWebSocketRequest(HandleWebSocket);
+			HttpContext.Current.AcceptWebSocketRequest(_webSocketHandler.RegisterWebSocket);
+
 			return StatusCode(HttpStatusCode.SwitchingProtocols);
 		}
 
@@ -52,43 +55,19 @@ namespace ESP8266_Temperature.Controllers
 			return Ok();
 		}
 
-		private async Task HandleWebSocket(AspNetWebSocketContext aspNetWebSocketContext)
+		[HttpGet]
+		[Route("Send")]
+		public async Task<IHttpActionResult> Send(string uuid, string message)
 		{
-			var webSocket = aspNetWebSocketContext.WebSocket;
-			_ws = webSocket;
-			var ctkSource = new CancellationTokenSource();
-
-			try
-			{
-				const int maxBufferSize = 1024;
-				var receivedDataBuffer = new ArraySegment<Byte>(new byte[maxBufferSize]);
-				
-				var i = 0;
-
-				//TODO Add a method to return node with following identifier
-				var flashInfo = aspNetWebSocketContext.Items["FlashInfo"];
-				_log.Debug(flashInfo);
-
-				//TODO register websocket on an object accesible from PinBussines
-
-				while (webSocket.State.Equals(WebSocketState.Open))
-				{
-					await webSocket.ReceiveAsync(receivedDataBuffer, ctkSource.Token);
-					var receivedMessage = Encoding.UTF8.GetString(receivedDataBuffer.Array, 0, receivedDataBuffer.Count);
-					_log.Debug(receivedMessage);
-				}
-			}
-			catch (Exception e)
-			{
-				_log.Error(e);
-				throw;
-			}
-			finally
-			{
-				//TODO Delete registered WebSocket
-				ctkSource.Cancel();
-				_log.Debug(webSocket);
-			}
+			await _webSocketHandler.SendMessage(uuid, message);
+			return Ok();
 		}
+
+		//[HttpPost]
+		//[Route("UpdatePinState")]
+		//public async Task<IHttpActionResult> UpdatePinState(PinModel model)
+		//{
+		//	await _webSocketHandler.
+		//}
 	}
 }

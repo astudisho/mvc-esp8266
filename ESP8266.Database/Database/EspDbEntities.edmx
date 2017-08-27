@@ -15,6 +15,17 @@
           <Property Name="Guid" Type="varchar" MaxLength="36" />
           <Property Name="IsActive" Type="bool" Nullable="false" />
         </EntityType>
+        <EntityType Name="t_pin">
+          <Key>
+            <PropertyRef Name="PinNumber" />
+            <PropertyRef Name="IdNode" />
+          </Key>
+          <Property Name="PinNumber" Type="int" Nullable="false" />
+          <Property Name="IsDigital" Type="bool" Nullable="false" />
+          <Property Name="Value" Type="float" Nullable="false" />
+          <Property Name="State" Type="bool" />
+          <Property Name="IdNode" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="t_temp_humedad">
           <Key>
             <PropertyRef Name="IdTempHumedad" />
@@ -26,6 +37,18 @@
           <Property Name="HoraFecha" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="IdNode" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="fk_t_esp_pin_t_node1">
+          <End Role="t_node" Type="Self.t_node" Multiplicity="1" />
+          <End Role="t_pin" Type="Self.t_pin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_node">
+              <PropertyRef Name="IdNode" />
+            </Principal>
+            <Dependent Role="t_pin">
+              <PropertyRef Name="IdNode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_t_temp_humedad_t_node">
           <End Role="t_node" Type="Self.t_node" Multiplicity="1" />
           <End Role="t_temp_humedad" Type="Self.t_temp_humedad" Multiplicity="*" />
@@ -40,7 +63,12 @@
         </Association>
         <EntityContainer Name="esp8266ModelStoreContainer">
           <EntitySet Name="t_node" EntityType="Self.t_node" Schema="test_esp8266" store:Type="Tables" />
+          <EntitySet Name="t_pin" EntityType="Self.t_pin" Schema="test_esp8266" store:Type="Tables" />
           <EntitySet Name="t_temp_humedad" EntityType="Self.t_temp_humedad" Schema="test_esp8266" store:Type="Tables" />
+          <AssociationSet Name="fk_t_esp_pin_t_node1" Association="Self.fk_t_esp_pin_t_node1">
+            <End Role="t_node" EntitySet="t_node" />
+            <End Role="t_pin" EntitySet="t_pin" />
+          </AssociationSet>
           <AssociationSet Name="fk_t_temp_humedad_t_node" Association="Self.fk_t_temp_humedad_t_node">
             <End Role="t_node" EntitySet="t_node" />
             <End Role="t_temp_humedad" EntitySet="t_temp_humedad" />
@@ -57,6 +85,11 @@
             <End Role="t_node" EntitySet="t_node" />
             <End Role="t_temp_humedad" EntitySet="t_temp_humedad" />
           </AssociationSet>
+          <EntitySet Name="t_pin" EntityType="esp8266Model.t_pin" />
+          <AssociationSet Name="fk_t_esp_pin_t_node1" Association="esp8266Model.fk_t_esp_pin_t_node1">
+            <End Role="t_node" EntitySet="t_node" />
+            <End Role="t_pin" EntitySet="t_pin" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="t_node">
           <Key>
@@ -68,6 +101,7 @@
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="t_temp_humedad" Relationship="esp8266Model.fk_t_temp_humedad_t_node" FromRole="t_node" ToRole="t_temp_humedad" />
           <Property Name="Guid" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="t_pin" Relationship="esp8266Model.fk_t_esp_pin_t_node1" FromRole="t_node" ToRole="t_pin" />
         </EntityType>
         <EntityType Name="t_temp_humedad">
           <Key>
@@ -89,6 +123,30 @@
               <PropertyRef Name="IdNode" />
             </Principal>
             <Dependent Role="t_temp_humedad">
+              <PropertyRef Name="IdNode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="t_pin">
+          <Key>
+            <PropertyRef Name="PinNumber" />
+            <PropertyRef Name="IdNode" />
+          </Key>
+          <Property Name="PinNumber" Type="Int32" Nullable="false" />
+          <Property Name="IsDigital" Type="Boolean" Nullable="false" />
+          <Property Name="Value" Type="Single" Nullable="false" />
+          <Property Name="State" Type="Boolean" />
+          <Property Name="IdNode" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="t_node" Relationship="esp8266Model.fk_t_esp_pin_t_node1" FromRole="t_pin" ToRole="t_node" />
+        </EntityType>
+        <Association Name="fk_t_esp_pin_t_node1">
+          <End Type="esp8266Model.t_node" Role="t_node" Multiplicity="1" />
+          <End Type="esp8266Model.t_pin" Role="t_pin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_node">
+              <PropertyRef Name="IdNode" />
+            </Principal>
+            <Dependent Role="t_pin">
               <PropertyRef Name="IdNode" />
             </Dependent>
           </ReferentialConstraint>
@@ -118,6 +176,17 @@
                 <ScalarProperty Name="Humedad" ColumnName="Humedad" />
                 <ScalarProperty Name="Temperatura" ColumnName="Temperatura" />
                 <ScalarProperty Name="IdTempHumedad" ColumnName="IdTempHumedad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_pin">
+            <EntityTypeMapping TypeName="esp8266Model.t_pin">
+              <MappingFragment StoreEntitySet="t_pin">
+                <ScalarProperty Name="IdNode" ColumnName="IdNode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="IsDigital" ColumnName="IsDigital" />
+                <ScalarProperty Name="PinNumber" ColumnName="PinNumber" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

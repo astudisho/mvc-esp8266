@@ -18,6 +18,7 @@ namespace ESP8266.Database.Database
         public t_node()
         {
             this.t_temp_humedad = new HashSet<t_temp_humedad>();
+            this.t_pin = new HashSet<t_pin>();
         }
     
         public int IdNode { get; set; }
@@ -28,5 +29,7 @@ namespace ESP8266.Database.Database
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<t_temp_humedad> t_temp_humedad { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<t_pin> t_pin { get; set; }
     }
 }

@@ -16,11 +16,9 @@ namespace ESP8266.Bussines.Bussines.Implementation
     public class Node : BaseBussines<NodeModel,t_node> , INode
     {
 	    private readonly INodeRepository _nodeRepository;
-	    private readonly ILog _log;
 
         public Node(INodeRepository nodeRepository, ILog log) : base(nodeRepository, log)
         {
-	        _log = log;
 	        _nodeRepository = nodeRepository;
         }
 
